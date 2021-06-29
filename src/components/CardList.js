@@ -1,14 +1,23 @@
 import React from 'react'
 import { Card } from './Card'
 
-export const CardList = ({facebookFollowers, twitterFollowers, instagramFollowers}) => {
+export const CardList = ({ socialMedia, userName }) => {
     return (
-        <>
-            <Card sitio={"facebook"} nombreUsuario={"nathanF"} followers={ facebookFollowers } dailyChange={-200}/>
-                
-            <Card sitio={"twitter"} nombreUsuario={"nathanF"} followers={ twitterFollowers } dailyChange={2}/>
-
-            <Card sitio={"instagram"} nombreUsuario={"nathanF"} followers={ instagramFollowers } dailyChange={-300}/>
-        </>
+        <div className="py-6 md:flex md:flex-row md:justify-around md:w-11/12 md:m-auto">
+        {
+            ( socialMedia !== undefined ) ? (
+                socialMedia.map((e, i) => {
+                    return <Card 
+                        key={ socialMedia[i].title }
+                        site={ socialMedia[i].title } 
+                        userName={ userName } 
+                        followers={ socialMedia[i].followers } 
+                        dailyChange={ socialMedia[i].daily }
+                    />;
+                })    
+            ) :
+            <h2>Loading</h2>
+        }
+        </div>
     )
 }
